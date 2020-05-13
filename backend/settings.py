@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from envparse import env
+
+# Reading .env File
+env.read_envfile()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +27,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '14xoy6(nyspw)-a_uvyvp$6#gv7%hkb)qt0%90-$2s_r8flt-)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
 
@@ -74,9 +79,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB", default=""),
+        "USER": env("POSTGRES_USER", default=""),
+        "PASSWORD": env("POSTGRES_PASSWORD", default=""),
+        "HOST": env("POSTGRES_HOST", default=""),
+        "PORT": env("POSTGRES_PORT", default=""),
     }
 }
 
@@ -117,4 +126,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+ADMIN_PATH = env('DJANGO_ADMIN_PATH', 'admin/')
+STATIC_URL = os.path.join('/', ADMIN_PATH, 'static/')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = env("MEDIA_ROOT", default=os.path.join(BASE_DIR, "media"))
+STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
+
+
