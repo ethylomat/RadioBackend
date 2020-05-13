@@ -12,6 +12,10 @@ RUN pip3 install -U pip
 COPY requirements.txt ${APP_ROOT}/requirements.txt
 RUN pip3 install -r ${APP_ROOT}/requirements.txt
 
+RUN apk --no-cache add build-base
+RUN apk --no-cache add postgresql-dev
+RUN pip3 install psycopg2
+
 # Set the working directory to /app
 WORKDIR ${APP_ROOT}
 
