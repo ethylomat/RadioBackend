@@ -34,12 +34,12 @@ services:
     container_name: web
     ports:
         - "8000:8000"
-    command: sh -c 'python manage.py migrate --noinput && ./helper/superuser.sh && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application -w 2 -b :8000 --capture-output --log-level=info'
+    command: sh -c 'until nc -z postgres 5432; do echo "Waiting for Postgres...";done;python manage.py migrate --noinput && ./helper/superuser.sh && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application -w 2 -b :8000 --capture-output --log-level=info'
     depends_on:
       - postgres
     volumes:
       - ./static:/static
-      - ./media:/media/
+      - ./media:/media
     env_file: .env
     links:
       - postgres
