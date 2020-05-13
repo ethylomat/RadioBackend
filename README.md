@@ -45,7 +45,14 @@ DJANGO_ADMIN_EMAIL=admin
 DJANGO_ADMIN_PASSWORD=admin
 ```
 
+## API-Documentation
+
+The API is documented at Swagger.
+
+[API Documentation (v1.0.0)](https://app.swaggerhub.com/apis/AwesomeRadio/radio-backend/1.0.0)
+
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
