@@ -16,6 +16,7 @@ RUN apk update && \
 RUN pip3 install -U pip
 COPY requirements.txt ${APP_ROOT}/requirements.txt
 RUN pip3 install -r ${APP_ROOT}/requirements.txt
+
 RUN pip3 install psycopg2
 
 # Set the working directory to /app
@@ -27,4 +28,4 @@ ADD . ${APP_ROOT}
 RUN chmod 775 -R ${APP_ROOT}
 
 # Command for testing the server
-CMD  ['python3 manage.py collectstatic --noinput', '&&', '/bin/sh','-c','python manage.py runserver']
+CMD python ./manage.py collectstatic --noinput
