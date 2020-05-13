@@ -13,6 +13,10 @@ services:
       - ./logs/:/var/log/nginx
     depends_on:
       - web
+    networks:
+      main:
+          aliases:
+              - nginx
 
   web:
     image: registry.gitlab.com/awesomeradio/backend:latest
@@ -30,8 +34,15 @@ services:
     env_file: .env
     links:
       - postgres
+    networks:
+        main:
+            aliases:
+                - web
 
   postgres:
     restart: always
     image: postgres:10
     container_name: postgres
+
+networks:
+  main:
