@@ -90,6 +90,15 @@ DATABASES = {
 }
 
 
+# Use a SQLite3 Database for local testing
+
+if env("SQLITE", cast=bool, default=False) == True:
+    DATABASES["default"] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -131,5 +140,3 @@ STATIC_URL = os.path.join('/', ADMIN_PATH, 'static/')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = env("MEDIA_ROOT", default=os.path.join(BASE_DIR, "media"))
 STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
-
-
