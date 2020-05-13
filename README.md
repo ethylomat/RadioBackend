@@ -1,3 +1,6 @@
+![coverage](https://gitlab.com/awesomeradio/backend/badges/master/coverage.svg?job=coverage)
+![pipeline](https://gitlab.com/awesomeradio/backend/badges/master/pipeline.svg?job=flat)
+
 # AwesomeRadio Backend
 
 This is the Backend-Server of the AwesomeRadio project. The AwesomeRadio project is a beginners practical at the Faculty of Mathematics and Computer Science at Heidelberg University.
