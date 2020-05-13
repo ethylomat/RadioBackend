@@ -48,6 +48,18 @@ The API is documented at Swagger.
 
 [API Documentation (v1.0.0)](https://app.swaggerhub.com/apis-docs/AwesomeRadio/radio-backend/1.0.0)
 
+```json
+[
+  {
+    "id": 0,
+    "frequency": 0.1,
+    "title": "Konrad Zuse entwickelt Z3",
+    "description": "Konrad Zuse entickelte 1941 den ersten funktionierenden Digitalrechner der Welt.",
+    "media_url": "https://radio.ethylomat.de/1.mp3"
+  }
+]
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
