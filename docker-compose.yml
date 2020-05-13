@@ -17,6 +17,15 @@ services:
       main:
           aliases:
               - nginx
+  postgres:
+    restart: always
+    image: postgres:10
+    container_name: postgres
+    env_file: .env
+    networks:
+      main:
+        aliases:
+          - postgres
 
   web:
     image: registry.gitlab.com/awesomeradio/backend:latest
@@ -39,10 +48,7 @@ services:
             aliases:
                 - web
 
-  postgres:
-    restart: always
-    image: postgres:10
-    container_name: postgres
+
 
 networks:
   main:
