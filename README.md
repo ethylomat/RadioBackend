@@ -1,5 +1,5 @@
 ![coverage](https://gitlab.com/awesomeradio/backend/badges/master/coverage.svg?job=coverage)
-![pipeline](https://gitlab.com/awesomeradio/backend/badges/master/pipeline.svg?job=flat)
+![coverage](https://gitlab.com/awesomeradio/backend/badges/master/coverage.svg?job=coverage)
 
 # AwesomeRadio Backend
 
@@ -27,6 +27,22 @@ $ git clone git@gitlab.com:awesomeradio/backend.git
 ```bash
 $ cd backend
 $ sudo docker-compose up
+```
+
+## Environment Variables
+
+The following environment variables should be set in a .env file in the project root.
+
+```
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+DJANGO_SETTINGS_MODULE=backend.settings
+DJANGO_ADMIN_USER=admin
+DJANGO_ADMIN_EMAIL=admin
+DJANGO_ADMIN_PASSWORD=admin
 ```
 
 ## Contributing
