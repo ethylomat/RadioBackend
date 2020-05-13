@@ -32,3 +32,6 @@ MANIFEST
 # Virtual Environment and Environment-Variables
 venv/
 .env
+
+# Logfiles
+logs/*
