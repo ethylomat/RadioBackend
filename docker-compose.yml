@@ -5,7 +5,8 @@ services:
   nginx:
     image: nginx:1.13
     ports:
-      - 3000:3000
+      - "10080:80"
+      - "10443:443"
     restart: always
     volumes:
       - ./helper/nginx.conf:/etc/nginx/conf.d/default.conf
@@ -18,9 +19,9 @@ services:
     build:
       context: .
     container_name: web
-    ports:
-      - '8000:8000'
-    command: bash -c 'python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application -w 2 -b :8000 --capture-output --log-level=info'
+    expose:
+      - "9010"
+    command: bash -c 'python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application -w 2 -b :9010 --capture-output --log-level=info'
     depends_on:
       - postgres
     volumes:
