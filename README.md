@@ -1,6 +1,3 @@
-![coverage](https://gitlab.com/awesomeradio/backend/badges/master/coverage.svg?job=coverage)
-![coverage](https://gitlab.com/awesomeradio/backend/badges/master/coverage.svg?job=coverage)
-
 # AwesomeRadio Backend
 
 This is the Backend-Server of the AwesomeRadio project. The AwesomeRadio project is a beginners practical at the Faculty of Mathematics and Computer Science at Heidelberg University.
@@ -49,7 +46,7 @@ DJANGO_ADMIN_PASSWORD=admin
 
 The API is documented at Swagger.
 
-[API Documentation (v1.0.0)](https://app.swaggerhub.com/apis/AwesomeRadio/radio-backend/1.0.0)
+[API Documentation (v1.0.0)](https://app.swaggerhub.com/apis-docs/AwesomeRadio/radio-backend/1.0.0)
 
 ## Contributing
 
