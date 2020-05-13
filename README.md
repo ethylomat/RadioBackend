@@ -30,6 +30,7 @@ $ sudo docker-compose up
 
 The following environment variables should be set in a .env file in the project root.
 
+Example:
 ```
 POSTGRES_DB=postgres
 POSTGRES_USER=postgres
@@ -48,6 +49,7 @@ The API is documented at Swagger.
 
 [API Documentation (v1.0.0)](https://app.swaggerhub.com/apis-docs/AwesomeRadio/radio-backend/1.0.0)
 
+API Response Example for `https://radio.ethylomat.de/api/v1/`:
 ```json
 [
   {
