@@ -17,6 +17,7 @@ services:
       main:
           aliases:
               - nginx
+
   postgres:
     restart: always
     image: postgres:10
@@ -47,8 +48,6 @@ services:
         main:
             aliases:
                 - web
-
-
 
 networks:
   main:

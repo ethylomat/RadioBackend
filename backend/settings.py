@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ["*"]
 
 INTERNAL_IPS = ["127.0.0.1"]
 
+HOSTNAME = env("HOSTNAME", default="127.0.0.1")
+
 # Application definition
 
 INSTALLED_APPS = [
