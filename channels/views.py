@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from rest_framework import routers, serializers, viewsets
+from .models import Channel
+from .serializers import ChannelSerializer
 
 
-def square(a):
-    return a * a
+# Viewset of Django-REST-Framework for all channels
+class ChannelsViewSet(viewsets.ModelViewSet):
+    queryset = Channel.objects.all()
+    serializer_class = ChannelSerializer
