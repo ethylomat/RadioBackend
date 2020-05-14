@@ -9,8 +9,8 @@ services:
     restart: always
     volumes:
       - ./helper/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/backend/static
-      - ./media:/backend/media
+      - static_volume:/backend/static
+      - media_volume:/backend/media
       - ./logs/:/var/log/nginx
     depends_on:
       - web
@@ -40,8 +40,8 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./static:/backend/static
-      - ./media:/backend/media
+      - static_volume:/backend/static
+      - media_volume:/backend/media
     env_file: .env
     links:
       - postgres
@@ -52,3 +52,7 @@ services:
 
 networks:
   main:
+
+volumes:
+  static_volume:
+  media_volume:
