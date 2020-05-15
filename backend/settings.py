@@ -96,7 +96,9 @@ DATABASES = {
 
 # Use a SQLite3 Database for local testing
 
-if env("SQLITE", cast=bool, default=False) == True:
+SQLITE = env("SQLITE", cast=bool, default=False)
+
+if SQLITE == True:
     DATABASES["default"] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',
