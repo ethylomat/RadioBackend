@@ -1,7 +1,6 @@
 image: docker:stable
 services:
   - docker:dind
-  - postgres:latest
 
 stages:
   - build
@@ -11,9 +10,6 @@ stages:
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
-  POSTGRES_DB: test_db
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
 
 before_script:
   - apk add --update python3-pip &&
@@ -31,12 +27,7 @@ build:
 test:
   stage: test
   script:
-  - export DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres
-  - export POSTGRES_DB=test_db
-  - export POSTGRES_USER=postgres
-  - export POSTGRES_PASSWORD=postgres
-  - export POSTGRES_HOST=localhost
-  - export POSTGRES_PORT=5432
+  - export DATABASE_URL=postgres://postgres:@postgres:5432/backend
   - apk update
   - apk add py3-setuptools
   - apk add python3-dev

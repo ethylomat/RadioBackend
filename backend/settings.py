@@ -88,20 +88,15 @@ DATABASES = {
         "NAME": env("POSTGRES_DB", default=""),
         "USER": env("POSTGRES_USER", default=""),
         "PASSWORD": env("POSTGRES_PASSWORD", default=""),
-        "HOST": env("POSTGRES_HOST", default="localhost"),
+        "HOST": env("POSTGRES_HOST", default="postgres"),
         "PORT": env("POSTGRES_PORT", default=5432),
-        "TEST": {
-            "NAME": "test_db",
-        },
     }
 }
 
 
 # Use a SQLite3 Database for local testing
 
-SQLITE = env("SQLITE", cast=bool, default=False)
-
-if SQLITE:
+if env("SQLITE", cast=bool, default=False) == True:
     DATABASES["default"] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',
