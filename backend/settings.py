@@ -101,7 +101,7 @@ DATABASES = {
 
 SQLITE = env("SQLITE", cast=bool, default=False)
 
-if SQLITE == True:
+if SQLITE:
     DATABASES["default"] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',

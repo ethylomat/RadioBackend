@@ -7,7 +7,10 @@ from .models import Channel
 
 class ChannelTestCase(TestCase):
     def setUp(self):
-        Channel.objects.create(title="testtitle", description="testdescription", frequency="0.1")
+        Channel.objects.create(
+            title="testtitle",
+            description="testdescription",
+            frequency="0.1")
 
     def test_channels_to_string(self):
         """The correct string representation is returned"""
