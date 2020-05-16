@@ -1,7 +1,7 @@
 image: docker:stable
 services:
   - docker:dind
-  - postgres:12.2-alpine
+  - postgres:latest
 
 stages:
   - build
@@ -31,7 +31,7 @@ build:
 test:
   stage: test
   script:
-  - export DATABASE_URL=postgres://postgres:@postgres:5432/postgres
+  - export DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres
   - export POSTGRES_DB=test_db
   - export POSTGRES_USER=postgres
   - export POSTGRES_PASSWORD=postgres

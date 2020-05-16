@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": env("POSTGRES_DB", default=""),
         "USER": env("POSTGRES_USER", default=""),
         "PASSWORD": env("POSTGRES_PASSWORD", default=""),
-        "HOST": env("POSTGRES_HOST", default="postgres"),
+        "HOST": env("POSTGRES_HOST", default="localhost"),
         "PORT": env("POSTGRES_PORT", default=5432),
         "TEST": {
             "NAME": "test_db",
