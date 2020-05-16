@@ -26,6 +26,8 @@ build:
 
 test:
   stage: test
+  before_script:
+    - source .env
   script:
   - export DATABASE_URL=postgres://postgres:@postgres:5432/backend
   - apk update
