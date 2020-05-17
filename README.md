@@ -47,9 +47,9 @@ DJANGO_ADMIN_PASSWORD=admin
 
 The API is documented at Swagger.
 
-[API Documentation (v1.0.0)](https://app.swaggerhub.com/apis-docs/AwesomeRadio/radio-backend/1.0.0)
+[API Documentation (v1.1.0)](https://app.swaggerhub.com/apis-docs/AwesomeRadio/radio-backend/1.1.0/)
 
-API Response Example for `https://radio.ethylomat.de/api/v1/`:
+API Response Example for `https://radio.ethylomat.de/api/v1/channels`:
 ```json
 [
   {
