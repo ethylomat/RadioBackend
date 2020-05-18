@@ -4,6 +4,6 @@ from .serializers import ChannelSerializer
 
 
 # Viewset of Django-REST-Framework for all channels
-class ChannelsViewSet(viewsets.ModelViewSet):
+class ChannelsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
