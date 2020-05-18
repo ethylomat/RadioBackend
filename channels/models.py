@@ -9,4 +9,7 @@ class Channel(models.Model):
     media_file = models.FileField(blank=True, null=True)
 
     def __str__(self):
-        return "[%s, %2.2f]" % (self.title, self.frequency)
+        if self.title and self.frequency:
+            return "[%s, %2.2f]" % (self.title, self.frequency)
+        else:
+            return "[%s]" % (self.title)
