@@ -1,13 +1,6 @@
-<html>
-<head>
-    <style>
-        td {
-            border: 1px solid black;
-            padding: 5px 10px;
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h2>List Channels</h2>
 
     <table style="border: 1px solid black;">
@@ -29,10 +22,12 @@
                 <a href="{{ channel.media_file }}">File</a>
             </td>
             <td>
-                <a href="#">Edit</a>
+                <a href="#">Edit</a> /
+                <a href="#">Delete</a>
             </td>
         </tr>
     {% endfor %}
     </table>
-</body>
-</html>
+
+    <button>Add Channel</button>
+{% endblock %}
