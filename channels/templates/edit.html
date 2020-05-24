@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Edit Channel</h2>
+
+    <form>
+        <label for="form_title">Title:</label><br>
+        <input type="text" id="form_title" name="title"><br><br>
+
+        <label for="form_frequency">Frequency:</label><br>
+        <input type="number" id="form_frequency" name="frequency"><br><br>
+
+        <label for="form_description">Description:</label><br>
+        <textarea id="form_description" name="description" rows="4" cols="50">
+        </textarea><br>
+
+        <label for="form_media_file">Media File:</label><br>
+        <input type="file" id="form_media_file" name="media_file"><br><br>
+    </form>
+
+
+    <button>Change Channel</button>
+{% endblock %}

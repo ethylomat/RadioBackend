@@ -11,10 +11,24 @@ class ChannelsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ChannelSerializer
 
 
+# CRUD Operations
 # Channel list view
-#
 
 def list(request):
     channels = Channel.objects.order_by('frequency')
     context = {"channels": channels}
     return render(request, "list.html", context=context)
+
+
+# CRUD Operations
+# Channel create view
+
+def create(request):
+    return render(request, "create.html")
+
+
+# CRUD Operations
+# Channel create view
+
+def edit(request):
+    return render(request, "edit.html")
