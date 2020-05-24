@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-        path('api/v1/', include('channels.urls')),
+        path('api/v1/', include('channels.api_urls')),
+        path('', include('channels.urls')),
         path(settings.ADMIN_PATH, admin.site.urls),
 ]
 

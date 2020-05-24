@@ -1,0 +1,38 @@
+<html>
+<head>
+    <style>
+        td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>List Channels</h2>
+
+    <table style="border: 1px solid black;">
+    <thead>
+        <tr style="font-weight: bold;">
+            <td>Title</td>
+            <td>Frequency</td>
+            <td>Description</td>
+            <td>Media File</td>
+            <td></td>
+        </tr>
+    </thead>
+    {% for channel in channels %}
+        <tr>
+            <td>{{ channel.title }}</td>
+            <td>{{ channel.frequency }}</td>
+            <td>{{ channel.description }}</td>
+            <td>
+                <a href="{{ channel.media_file }}">File</a>
+            </td>
+            <td>
+                <a href="#">Edit</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
