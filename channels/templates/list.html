@@ -3,31 +3,35 @@
 {% block content %}
     <h2>List Channels</h2>
 
-    <table style="border: 1px solid black;">
-    <thead>
-        <tr style="font-weight: bold;">
-            <td>Title</td>
-            <td>Frequency</td>
-            <td>Description</td>
-            <td>Media File</td>
-            <td></td>
-        </tr>
-    </thead>
-    {% for channel in channels %}
-        <tr>
-            <td>{{ channel.title }}</td>
-            <td>{{ channel.frequency }}</td>
-            <td>{{ channel.description }}</td>
-            <td>
-                <a href="media/{{ channel.media_file }}">File</a>
-            </td>
-            <td>
-                <a href="#">Edit</a> /
-                <a href="#">Delete</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
+    {% if channels %}
+        <table style="border: 1px solid black;">
+        <thead>
+            <tr style="font-weight: bold;">
+                <td>Title</td>
+                <td>Frequency</td>
+                <td>Description</td>
+                <td>Media File</td>
+                <td></td>
+            </tr>
+        </thead>
+        {% for channel in channels %}
+            <tr>
+                <td>{{ channel.title }}</td>
+                <td>{{ channel.frequency }}</td>
+                <td>{{ channel.description }}</td>
+                <td>
+                    <a href="media/{{ channel.media_file }}">File</a>
+                </td>
+                <td>
+                    <a href="#">Edit</a> /
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        No channels created <br>
+    {% endif %}
 
     <button>Add Channel</button>
 {% endblock %}

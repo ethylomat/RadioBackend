@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'edit', views.edit),
-    url(r'create', views.create),
-    url(r'', views.list),
+    url(r'edit', views.edit, name='channels-edit'),
+    url(r'create', views.create, name='channels-create'),
+    url(r'', views.list, name='channels-list'),
 ]
