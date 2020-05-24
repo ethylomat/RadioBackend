@@ -26,6 +26,13 @@ build:
 
 test:
   stage: test
+  services:
+    - postgres:12.2-alpine
+  variables:
+    POSTGRES_DB: backend
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: ""
+    POSTGRES_HOST_AUTH_METHOD: trust
   script:
   - export DATABASE_URL=postgres://postgres:@postgres:5432/backend
   - apk update
