@@ -34,6 +34,7 @@ test:
     DOCKER_DRIVER: overlay2
     POSTGRES_DB: backend
     POSTGRES_USER: postgres
+    POSTGRES_PORT: 5432
     POSTGRES_PASSWORD: ""
     POSTGRES_HOST_AUTH_METHOD: trust
   script:
