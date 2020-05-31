@@ -1,4 +1,4 @@
-from .models import Channel, ChannelSet, ChannelParameter
+from .models import Channel, ChannelSet, ChannelParameter, ChannelFile
 from rest_framework import serializers
 
 
@@ -11,15 +11,25 @@ class ChannelParameterSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['parameter', 'value']
 
 
+#  Serializer for File (Rest-Framework)
+#
+
+class ChannelFileSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ChannelFile
+        fields = ['id', 'media_file', 'extension']
+
+
 #  Serializer for Channel (Rest-Framework)
 #
 
 class ChannelSerializer(serializers.HyperlinkedModelSerializer):
     parameters = ChannelParameterSerializer(many=True)
+    files = ChannelFileSerializer(many=True)
 
     class Meta:
         model = Channel
-        fields = ['id', 'title', 'description', 'frequency', 'media_file', 'parameters']
+        fields = ['id', 'title', 'description', 'from_frequency', 'to_frequency', 'files', 'parameters']
 
 
 # Serializer for ChannelSet (Rest-Framework)
