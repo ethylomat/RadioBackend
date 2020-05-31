@@ -1,14 +1,22 @@
 from django.shortcuts import render
 from rest_framework import routers, serializers, viewsets
-from .models import Channel
-from .serializers import ChannelSerializer
+from .models import Channel, ChannelSet
+from .serializers import ChannelSerializer, ChannelSetSerializer
 
-# API Viewset (Rest-Framework)
+# API Viewset - Channel (Rest-Framework)
 #
 
 class ChannelsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
+
+
+# API Viewset - ChannelSet (Rest-Framework)
+#
+
+class ChannelSetsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ChannelSet.objects.all()
+    serializer_class = ChannelSetSerializer
 
 
 # CRUD Operations

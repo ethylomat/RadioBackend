@@ -9,6 +9,7 @@ app_name = 'channels'
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'channels', views.ChannelsViewSet)
+router.register(r'channelsets', views.ChannelSetsViewSet)
 
 
 urlpatterns = [
