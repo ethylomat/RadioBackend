@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class ChannelParameter(models.Model):
+    parameter = models.CharField(max_length=2048, blank=True, null=True)
+    value = models.CharField(max_length=2048, blank=True, null=True)
+
+    channel = models.ForeignKey("Channel", related_name='parameters', on_delete=models.CASCADE, blank=True, null=True)
+
+
 class ChannelSet(models.Model):
     title = models.CharField(max_length=140, blank=True, null=True)
 
