@@ -6,6 +6,9 @@ ENV PYTHONUNBUFFERED 1
 ENV APP_ROOT /project
 WORKDIR ${APP_ROOT}
 
+RUN mkdir -p ${APP_ROOT}/static
+RUN mkdir -p ${APP_ROOT}/media
+
 # Insall dependencies of postgresql connection
 RUN apk update && \
     apk add --virtual build-deps gcc python-dev musl-dev && \
