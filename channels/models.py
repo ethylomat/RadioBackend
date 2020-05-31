@@ -40,7 +40,7 @@ class Channel(models.Model):
     channel_set = models.ForeignKey("ChannelSet", related_name='channels', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        if self.title and self.frequency:
-            return "[%s, %2.2f]" % (self.title, self.frequency)
+        if self.title and self.from_frequency and self.to_frequency:
+            return "[%s, %2.2f - %2.2f]" % (self.title, self.from_frequency, self.to_frequency)
         else:
             return "[%s]" % (self.title)

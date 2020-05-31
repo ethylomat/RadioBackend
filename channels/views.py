@@ -23,7 +23,7 @@ class ChannelSetsViewSet(viewsets.ReadOnlyModelViewSet):
 # Channel list view
 
 def list(request):
-    channels = Channel.objects.order_by('frequency')
+    channels = Channel.objects.order_by('from_frequency')
     context = {"channels": channels}
     return render(request, "list.html", context=context)
 

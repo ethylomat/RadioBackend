@@ -2,8 +2,8 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Channel
 
-def create_channel(title=None, description=None, frequency=None):
-    return Channel.objects.create(title=title, description=description, frequency=frequency)
+def create_channel(title=None, description=None, from_frequency=None, to_frequency=None):
+    return Channel.objects.create(title=title, description=description, from_frequency=from_frequency, to_frequency=to_frequency)
 
 # Testing the correct return string
 #
@@ -16,7 +16,8 @@ class ChannelsReturnStringTest(TestCase):
         c1 = Channel(
             title="Test-Title",
             description="Test-Description",
-            frequency=0.01,
+            from_frequency=0.01,
+            to_frequency=0.03,
         )
 
         c2 = Channel(
@@ -26,7 +27,7 @@ class ChannelsReturnStringTest(TestCase):
 
         c3 = Channel()
 
-        self.assertEqual(str(c1), "[Test-Title, 0.01]")
+        self.assertEqual(str(c1), "[Test-Title, 0.01 - 0.03]")
         self.assertEqual(str(c2), "[Test-Title]")
         self.assertEqual(str(c3), "[None]")
 
@@ -45,7 +46,7 @@ class ChannelIndexViewTests(TestCase):
         """
         Test list with created channel
         """
-        c1 = create_channel(title="Test-Title", description="Test-Description", frequency=0.01)
+        c1 = create_channel(title="Test-Title", description="Test-Description", from_frequency=0.01, to_frequency=0.03)
         response = self.client.get(reverse('channels-list'))
         self.assertNotContains(response, "No channels created")
         self.assertContains(response, "Test-Title")

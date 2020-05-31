@@ -17,7 +17,7 @@
         {% for channel in channels %}
             <tr>
                 <td>{{ channel.title }}</td>
-                <td>{{ channel.frequency }}</td>
+                <td>{{ channel.from_frequency }} - {{ channel.to_frequency }}</td>
                 <td>{{ channel.description }}</td>
                 <td>
                     <a href="media/{{ channel.media_file }}">File</a>
