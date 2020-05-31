@@ -15,7 +15,7 @@ class Channel(models.Model):
     frequency = models.FloatField(blank=True, null=True, default=0)
     media_file = models.FileField(blank=True, null=True)
 
-    channel_set = models.ForeignKey("ChannelSet", on_delete=models.CASCADE, blank=True, null=True)
+    channel_set = models.ForeignKey("ChannelSet", related_name='channels', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         if self.title and self.frequency:
