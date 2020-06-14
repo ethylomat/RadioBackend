@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Channelset Detail</h2>
+
+
+<b>Title:</b> {{channelset.title}}
+
+<div style="margin: 10px 0;">
+    <h5>Channels</h5>
+
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+           <td><b>Title</b></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for channel in channelset.channels.all  %}
+             <tr>
+                 <td>
+                     {{ channel.title }}
+                 </td>
+                 <td>
+                     <a href="{% url 'channel_edit' pk=channel.id %}">Edit</a> /
+                     <a href="{% url 'channel_delete' pk=channel.id %}">Delete</a>
+                 </td>
+             </tr>
+        {% endfor %}
+
+        <tr>
+            <td>
+                <a href="{% url 'channel_create' %}" class="btn btn-primary btn-sm">Add Channel</a>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="buttonbar">
+    <a href="{% url 'channelset_edit' pk=channelset.id %}" class="btn btn-primary btn-sm">Edit Channelset</a>
+    <a href="{% url 'channelset_delete' pk=channelset.id %}" class="btn btn-danger btn-sm">Delete Channelset</a>
+</div>
+
+{% endblock %}

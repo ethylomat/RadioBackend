@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Channel Detail</h2>
 
-<table>
+<table class="table table-bordered table-sm">
     <tr>
         <td>Title</td>
         <td>{{channel.title}}</td>
@@ -13,11 +13,11 @@
         <td>{{channel.description}}</td>
     </tr>
     <tr>
-        <td>From Frequency</td>
+        <td>Lower Frequency</td>
         <td>{{channel.from_frequency}}</td>
     </tr>
     <tr>
-        <td>To Frequency</td>
+        <td>Higher Frequency</td>
         <td>{{channel.to_frequency}}</td>
     </tr>
 </table>

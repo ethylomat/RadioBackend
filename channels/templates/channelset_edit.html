@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if request.resolver_match.url_name == 'channelset_edit' %}
+        <h2>Edit channelset</h2>
+    {% else %}
+        <h2>Create channelset</h2>
+    {% endif %}
+    <form method="POST" class="post-form" novalidate>{% csrf_token %}
+        {{ form|crispy }}
+        <div class="buttonbar">
+            <button style="margin: 0;" type="submit" class="btn btn-success">Save</button>
+            <a href="{% url 'channelset_list' %}" class="btn btn-secondary">Discard</a>
+        </div>
+    </form>
+{% endblock %}

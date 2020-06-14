@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import routers, serializers, viewsets
 from .models import Channel, ChannelSet
-from .forms import ChannelForm, DeleteChannelForm
+from .forms import ChannelForm, DeleteChannelForm, ChannelSetForm, DeleteChannelSetForm
 from .serializers import ChannelSerializer, ChannelSetSerializer
 
 # API Viewset - Channel (Rest-Framework)
@@ -30,6 +30,15 @@ def channel_list(request):
 
 
 # CRUD Operations
+# ChannelSet list view
+
+def channelset_list(request):
+    channelsets = ChannelSet.objects.all()
+    context = {"channelsets": channelsets}
+    return render(request, "channelset_list.html", context=context)
+
+
+# CRUD Operations
 # Channel create view
 
 def channel_create(request):
@@ -43,6 +52,22 @@ def channel_create(request):
     else:
         form = ChannelForm()
     return render(request, 'channel_edit.html', {'form': form})
+
+
+# CRUD Operations
+# Channelset create view
+
+def channelset_create(request):
+    if request.method == "POST":
+        form = ChannelSetForm(request.POST)
+        if form.is_valid():
+            channelset = form.save(commit=False)
+            #channelset.description = "Test"
+            channelset.save()
+            return redirect('channelset_detail', pk=channelset.pk)
+    else:
+        form = ChannelSetForm()
+    return render(request, 'channelset_edit.html', {'form': form})
 
 
 # CRUD Operations
@@ -63,11 +88,36 @@ def channel_edit(request, pk):
 
 
 # CRUD Operations
+# Channelset create view
+
+def channelset_edit(request, pk):
+    channelset = get_object_or_404(ChannelSet, pk=pk)
+    if request.method == "POST":
+        form = ChannelSetForm(request.POST, instance=channelset)
+        if form.is_valid():
+            channelset = form.save(commit=False)
+            #channelset.description = "Test"
+            channelset.save()
+            return redirect('channelset_detail', pk=channelset.pk)
+    else:
+        form = ChannelSetForm(instance=channelset)
+    return render(request, 'channelset_edit.html', {'form': form})
+
+
+# CRUD Operations
 # Channel detail view
 
 def channel_detail(request, pk):
     channel = get_object_or_404(Channel, pk=pk)
     return render(request, 'channel_detail.html', {'channel': channel})
+
+
+# CRUD Operations
+# Channelset detail view
+
+def channelset_detail(request, pk):
+    channelset = get_object_or_404(ChannelSet, pk=pk)
+    return render(request, 'channelset_detail.html', {'channelset': channelset})
 
 
 # CRUD Operations
@@ -85,3 +135,20 @@ def channel_delete(request, pk):
     else:
         form = DeleteChannelForm(instance=channel)
     return render(request, 'channel_delete.html', {'form': form, 'channel': channel})
+
+
+# CRUD Operations
+# Channelset delete view
+
+def channelset_delete(request, pk):
+    channelset = get_object_or_404(ChannelSet, pk=pk)
+
+    if request.method == 'POST':
+        form = DeleteChannelSetForm(request.POST, instance=channelset)
+        if form.is_valid(): # checks CSRF
+            channelset.delete()
+            return redirect('channelset_list')
+
+    else:
+        form = DeleteChannelSetForm(instance=channelset)
+    return render(request, 'channelset_delete.html', {'form': form, 'channelset': channelset})
