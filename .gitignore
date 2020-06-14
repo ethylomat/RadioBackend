@@ -42,3 +42,6 @@ logs/*
 # Testing Results
 htmlcov/
 .coverage
+
+# Mac OS X
+.DS_Store

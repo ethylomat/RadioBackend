@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'crispy_forms',
     'channels',
 ]
 
@@ -143,8 +144,11 @@ ADMIN_PATH = env('DJANGO_ADMIN_PATH', 'admin/')
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = env("MEDIA_ROOT", default=os.path.join(BASE_DIR, "media"))
-STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
+#STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 # Rest Framework
 # Settings for the Rest-Framework package
@@ -155,3 +159,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
+
+
+# Crispy Forms for styling the forms (Django Module)
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

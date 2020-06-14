@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-    <h2>New channel</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+    {% if request.resolver_match.url_name == 'channel_edit' %}
+        <h2>Edit channel</h2>
+    {% else %}
+        <h2>Create channel</h2>
+    {% endif %}
+    <form method="POST" class="post-form" novalidate>{% csrf_token %}
+        {{ form|crispy }}
+        <div class="buttonbar">
+            <button style="margin: 0;" type="submit" class="btn btn-success">Save</button>
+            <a href="{% url 'channel_list' %}" class="btn btn-secondary">Discard</a>
+        </div>
     </form>
 {% endblock %}

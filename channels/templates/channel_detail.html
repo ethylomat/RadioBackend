@@ -23,6 +23,9 @@
 </table>
 
 
-<a href="{% url 'channel_edit' pk=channel.id %}">Edit Channel</a>
+<div class="buttonbar">
+    <a href="{% url 'channel_edit' pk=channel.id %}" class="btn btn-primary btn-sm">Edit Channel</a>
+    <a href="{% url 'channel_delete' pk=channel.id %}" class="btn btn-danger btn-sm">Delete Channel</a>
+</div>
 
 {% endblock %}

@@ -34,5 +34,7 @@
         No channels created <br>
     {% endif %}
 
-    <a href="{% url 'channel_create' %}">Add Channel</a>
+    <div class="buttonbar">
+        <a href="{% url 'channel_create' %}" class="btn btn-primary btn-sm">Add Channel</a>
+    </div>
 {% endblock %}

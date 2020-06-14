@@ -1,24 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>AwesomeRadio</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
+
         td {
             border: 1px solid black;
             padding: 5px 10px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Yanone Kaffeesatz', sans-serif;
         }
 
         #contentblock{
             width: 900px;
             margin: 20px auto;
             box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-            padding: 5px 20px 20px 20px;
+            padding: 30px 30px 30px 30px;
+            background-color: rgba(255,255,255,1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            margin: 0px 0 15px 0;
         }
 
         button {
             margin: 15px 0 0 0;
+        }
+
+        .buttonbar{
+            margin: 15px 0 0 0;
+        }
+
+        body {
+            background-image: url("{% static "img/background.gif" %}");
         }
     </style>
 </head>
