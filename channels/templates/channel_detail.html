@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Channel Detail</h2>
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td>{{channel.title}}</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>{{channel.description}}</td>
+    </tr>
+    <tr>
+        <td>From Frequency</td>
+        <td>{{channel.from_frequency}}</td>
+    </tr>
+    <tr>
+        <td>To Frequency</td>
+        <td>{{channel.to_frequency}}</td>
+    </tr>
+</table>
+
+
+<a href="{% url 'channel_edit' pk=channel.id %}">Edit Channel</a>
+
+{% endblock %}
