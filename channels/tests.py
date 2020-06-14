@@ -37,7 +37,7 @@ class ChannelIndexViewTests(TestCase):
         """
         If no channel exist -> Message is displayed
         """
-        response = self.client.get(reverse('channels-list'))
+        response = self.client.get(reverse('channel_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No channels created")
         self.assertQuerysetEqual(response.context['channels'], [])
@@ -47,7 +47,7 @@ class ChannelIndexViewTests(TestCase):
         Test list with created channel
         """
         c1 = create_channel(title="Test-Title", description="Test-Description", from_frequency=0.01, to_frequency=0.03)
-        response = self.client.get(reverse('channels-list'))
+        response = self.client.get(reverse('channel_list'))
         self.assertNotContains(response, "No channels created")
         self.assertContains(response, "Test-Title")
         self.assertNotEqual(response.context['channels'], [])
