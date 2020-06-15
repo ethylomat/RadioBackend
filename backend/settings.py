@@ -144,11 +144,13 @@ ADMIN_PATH = env('DJANGO_ADMIN_PATH', 'admin/')
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = env("MEDIA_ROOT", default=os.path.join(BASE_DIR, "media"))
-#STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+else:
+    STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
 
 # Rest Framework
 # Settings for the Rest-Framework package
