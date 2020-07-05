@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from .models import Channel
+from django.contrib.auth.models import User
 
 def create_channel(title=None, description=None, from_frequency=None, to_frequency=None):
     return Channel.objects.create(title=title, description=description, from_frequency=from_frequency, to_frequency=to_frequency)
@@ -9,6 +10,9 @@ def create_channel(title=None, description=None, from_frequency=None, to_frequen
 #
 
 class ChannelsReturnStringTest(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+
     def test_correct_return_string(self):
         """
         Testing for correct strings of __str__() method
@@ -33,6 +37,9 @@ class ChannelsReturnStringTest(TestCase):
 
 
 class ChannelIndexViewTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+
     def test_list_no_channels(self):
         """
         If no channel exist -> Message is displayed
