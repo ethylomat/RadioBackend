@@ -22,6 +22,14 @@
     </tr>
 </table>
 
+<h5>Files</h5>
+
+<ul>
+    {% for file in channel.files.all %}
+        <li>{{ file.filename }}</li>
+    {% endfor %}
+</ul>
+
 
 <div class="buttonbar">
     <a href="{% url 'channel_edit' pk=channel.id %}" class="btn btn-primary btn-sm">Edit Channel</a>

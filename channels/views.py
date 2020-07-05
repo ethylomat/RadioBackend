@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from rest_framework import routers, serializers, viewsets
 from .models import Channel, ChannelSet
 from .forms import ChannelForm, DeleteChannelForm, ChannelSetForm, DeleteChannelSetForm
@@ -23,6 +24,7 @@ class ChannelSetsViewSet(viewsets.ReadOnlyModelViewSet):
 # CRUD Operations
 # Channel list view
 
+@login_required
 def channel_list(request):
     channels = Channel.objects.order_by('from_frequency')
     context = {"channels": channels}
@@ -32,6 +34,7 @@ def channel_list(request):
 # CRUD Operations
 # ChannelSet list view
 
+@login_required
 def channelset_list(request):
     channelsets = ChannelSet.objects.all()
     context = {"channelsets": channelsets}
@@ -41,6 +44,7 @@ def channelset_list(request):
 # CRUD Operations
 # Channel create view
 
+@login_required
 def channel_create(request):
     if request.method == "POST":
         form = ChannelForm(request.POST)
@@ -57,6 +61,7 @@ def channel_create(request):
 # CRUD Operations
 # Channelset create view
 
+@login_required
 def channelset_create(request):
     if request.method == "POST":
         form = ChannelSetForm(request.POST)
@@ -73,6 +78,7 @@ def channelset_create(request):
 # CRUD Operations
 # Channel create view
 
+@login_required
 def channel_edit(request, pk):
     channel = get_object_or_404(Channel, pk=pk)
     if request.method == "POST":
@@ -90,6 +96,7 @@ def channel_edit(request, pk):
 # CRUD Operations
 # Channelset create view
 
+@login_required
 def channelset_edit(request, pk):
     channelset = get_object_or_404(ChannelSet, pk=pk)
     if request.method == "POST":
@@ -107,6 +114,7 @@ def channelset_edit(request, pk):
 # CRUD Operations
 # Channel detail view
 
+@login_required
 def channel_detail(request, pk):
     channel = get_object_or_404(Channel, pk=pk)
     return render(request, 'channel_detail.html', {'channel': channel})
@@ -115,6 +123,7 @@ def channel_detail(request, pk):
 # CRUD Operations
 # Channelset detail view
 
+@login_required
 def channelset_detail(request, pk):
     channelset = get_object_or_404(ChannelSet, pk=pk)
     return render(request, 'channelset_detail.html', {'channelset': channelset})
@@ -123,6 +132,7 @@ def channelset_detail(request, pk):
 # CRUD Operations
 # Channel delete view
 
+@login_required
 def channel_delete(request, pk):
     channel = get_object_or_404(Channel, pk=pk)
 
@@ -140,6 +150,7 @@ def channel_delete(request, pk):
 # CRUD Operations
 # Channelset delete view
 
+@login_required
 def channelset_delete(request, pk):
     channelset = get_object_or_404(ChannelSet, pk=pk)
 

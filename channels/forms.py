@@ -15,12 +15,16 @@ class ChannelForm(forms.ModelForm):
     from_frequency = forms.FloatField(required=True, label="Lower frequency")
     to_frequency = forms.FloatField(required=True, label="Higher frequency")
 
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+
     def clean(self):
         super(ChannelForm, self).clean()
+        file_field = self.cleaned_data.get('file_field')
+
         from_frequency = self.cleaned_data.get('from_frequency')
         to_frequency = self.cleaned_data.get('to_frequency')
 
-        try:
+        if type(from_frequency) == float and type(to_frequency) == float:
             if from_frequency < 0 or from_frequency > 1:
                 self._errors['from_frequency'] = self.error_class([
                     'Lower frequency must be in between 0 and 1'])
@@ -32,11 +36,7 @@ class ChannelForm(forms.ModelForm):
                     'Lower frequency must lower than higher frequency'])
                 self._errors['to_frequency'] = self.error_class([
                     'Higher frequency must higher than lower frequency'])
-        except:
-            pass
         return self.cleaned_data
-
-
 
 
 # Form for creating and editing channelsets

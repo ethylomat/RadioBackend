@@ -64,7 +64,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'backend/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -166,3 +166,13 @@ REST_FRAMEWORK = {
 # Crispy Forms for styling the forms (Django Module)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Setting the URL to be redirected to login and after login
+
+LOGIN_URL = '/login'
+#LOGIN_REDIRECT_URL = '/login'
+
+
+# Format URLs with HTTPS
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

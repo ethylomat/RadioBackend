@@ -1,7 +1,6 @@
 import os
 from django.db import models
 
-
 class ChannelParameter(models.Model):
     parameter = models.CharField(max_length=2048, blank=True, null=True)
     value = models.CharField(max_length=2048, blank=True, null=True)
@@ -11,6 +10,7 @@ class ChannelParameter(models.Model):
 
 class ChannelFile(models.Model):
     media_file = models.FileField(blank=True, null=True)
+    file_hash = models.CharField(max_length=512, blank=True, null=True)
 
     channel = models.ForeignKey("Channel", related_name='files', on_delete=models.CASCADE, blank=True, null=True)
 

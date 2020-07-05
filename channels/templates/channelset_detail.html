@@ -23,6 +23,7 @@
                      {{ channel.title }}
                  </td>
                  <td>
+                     <a href="{% url 'channel_detail' pk=channel.id %}">Detail</a> /
                      <a href="{% url 'channel_edit' pk=channel.id %}">Edit</a> /
                      <a href="{% url 'channel_delete' pk=channel.id %}">Delete</a>
                  </td>
