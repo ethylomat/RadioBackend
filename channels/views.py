@@ -1,4 +1,4 @@
-import os
+import os, time, ffmpeg, hashlib
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers, serializers, viewsets
@@ -15,21 +15,50 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def add_file_to_channel(channel, file, md5):
     channel_file = ChannelFile.objects.create(media_file=file, channel=channel, file_hash=md5)
-    channel.files.add(channel_file)
-
 
 def handle_uploaded_file(channel, f, filename):
+    channel.files.all().delete()
+
     md5 = calculate_md5(f)
-    filepath = os.path.join(BASE_DIR, "media/") + md5 + "." + filename.split(".")[-1]
-    filename = md5 + "." + filename.split(".")[-1]
+    filetype = "." + filename.split(".")[-1]
+    filepath = os.path.join(BASE_DIR, "media/") + md5 + filetype
+    filename = md5 + filetype
 
     with open(filepath, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
     add_file_to_channel(channel, filename, md5)
+
+    convert_file(channel, filepath, filename)
+
     return filepath, md5
 
+
+def convert_file(channel, filepath, filename):
+    print("Converting files")
+    file_title = ".".join(filename.split(".")[:-1])
+    filetype = "." + filepath.split(".")[-1]
+
+    base_filepath = os.path.join(BASE_DIR, "media/")
+
+    output_filepath = base_filepath + file_title + ".mp3"
+    if not os.path.exists(output_filepath):
+        print("Converting to mp3")
+        stream = ffmpeg.input(filepath)
+        stream = ffmpeg.output(stream, output_filepath)
+        ffmpeg.run(stream)
+        md5 = hashlib.md5(open(output_filepath,'rb').read()).hexdigest()
+        add_file_to_channel(channel, file_title + ".mp3", md5)
+
+    output_filepath = base_filepath + file_title + ".ogg"
+    if not os.path.exists(output_filepath):
+        print("Converting to ogg")
+        stream = ffmpeg.input(filepath)
+        stream = ffmpeg.output(stream, output_filepath)
+        ffmpeg.run(stream)
+        md5 = hashlib.md5(open(output_filepath, 'rb').read()).hexdigest()
+        add_file_to_channel(channel, file_title + ".ogg", md5)
 
 # API Viewset - Channel (Rest-Framework)
 #
@@ -114,10 +143,7 @@ def channel_edit(request, pk):
 
             request_file = request.FILES['file_field']
             if request_file != None:
-                if channel_instance.files:
-                    channel_instance.files.all().delete()
-
-                filepath, md5 = handle_uploaded_file(channel_instance, request_file, str(request_file))
+                handle_uploaded_file(channel_instance, request_file, str(request_file))
 
             channel_instance.save()
             return redirect('channel_detail', pk=channel_instance.pk)

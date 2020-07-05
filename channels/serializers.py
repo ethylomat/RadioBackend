@@ -17,7 +17,7 @@ class ChannelParameterSerializer(serializers.HyperlinkedModelSerializer):
 class ChannelFileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ChannelFile
-        fields = ['id', 'media_file', 'extension']
+        fields = ['id', 'media_file', 'extension', 'file_hash']
 
 
 #  Serializer for Channel (Rest-Framework)
