@@ -1,9 +1,35 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers, serializers, viewsets
-from .models import Channel, ChannelSet
+from .models import Channel, ChannelSet, ChannelFile, ChannelParameter
 from .forms import ChannelForm, DeleteChannelForm, ChannelSetForm, DeleteChannelSetForm
 from .serializers import ChannelSerializer, ChannelSetSerializer
+from django_file_md5 import calculate_md5
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+# Function for adding files to channel
+#
+
+def add_file_to_channel(channel, file, md5):
+    channel_file = ChannelFile.objects.create(media_file=file, channel=channel, file_hash=md5)
+    channel.files.add(channel_file)
+
+
+def handle_uploaded_file(channel, f, filename):
+    md5 = calculate_md5(f)
+    filepath = os.path.join(BASE_DIR, "media/") + md5 + "." + filename.split(".")[-1]
+    filename = md5 + "." + filename.split(".")[-1]
+
+    with open(filepath, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+    add_file_to_channel(channel, filename, md5)
+    return filepath, md5
+
 
 # API Viewset - Channel (Rest-Framework)
 #
@@ -80,16 +106,23 @@ def channelset_create(request):
 
 @login_required
 def channel_edit(request, pk):
-    channel = get_object_or_404(Channel, pk=pk)
+    channel_instance = get_object_or_404(Channel, pk=pk)
     if request.method == "POST":
-        form = ChannelForm(request.POST, instance=channel)
+        form = ChannelForm(request.POST, instance=channel_instance)
         if form.is_valid():
-            channel = form.save(commit=False)
-            #channel.description = "Test"
-            channel.save()
-            return redirect('channel_detail', pk=channel.pk)
+            channel_instance = form.save(commit=False)
+
+            request_file = request.FILES['file_field']
+            if request_file != None:
+                if channel_instance.files:
+                    channel_instance.files.all().delete()
+
+                filepath, md5 = handle_uploaded_file(channel_instance, request_file, str(request_file))
+
+            channel_instance.save()
+            return redirect('channel_detail', pk=channel_instance.pk)
     else:
-        form = ChannelForm(instance=channel)
+        form = ChannelForm(instance=channel_instance)
     return render(request, 'channel_edit.html', {'form': form})
 
 
