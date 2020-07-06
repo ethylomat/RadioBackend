@@ -9,11 +9,14 @@ WORKDIR ${APP_ROOT}
 RUN mkdir -p ${APP_ROOT}/static
 RUN mkdir -p ${APP_ROOT}/media
 
+COPY static/ ${APP_ROOT}/static
+
 # Insall dependencies of postgresql connection
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \
     apk add postgresql-dev && \
-    apk add netcat-openbsd
+    apk add netcat-openbsd && \
+    apk add ffmpeg
 
 # Install packages
 RUN pip3 install -U pip
