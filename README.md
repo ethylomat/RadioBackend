@@ -52,13 +52,28 @@ The API is documented at Swagger.
 API Response Example for `https://radio.ethylomat.de/api/v1/channels`:
 ```json
 [
-  {
-    "id": 0,
-    "frequency": 0.1,
-    "title": "Konrad Zuse entwickelt Z3",
-    "description": "Konrad Zuse entickelte 1941 den ersten funktionierenden Digitalrechner der Welt.",
-    "media_url": "https://radio.ethylomat.de/1.mp3"
-  }
+    {
+        "id": 1,
+        "title": "Konrad Zuse",
+        "description": "Konrad Zuse talk at TU Berlin",
+        "from_frequency": 0.1,
+        "to_frequency": 0.3,
+        "files": [
+            {
+                "id": 49,
+                "media_file": "http://127.0.0.1:8000/media/e9dbfd1ea2e1720cd2d7e044e1ad2293.ogg",
+                "extension": ".ogg",
+                "file_hash": "e9dbfd1ea2e1720cd2d7e044e1ad2293"
+            },
+            {
+                "id": 50,
+                "media_file": "http://127.0.0.1:8000/media/e9dbfd1ea2e1720cd2d7e044e1ad2293.mp3",
+                "extension": ".mp3",
+                "file_hash": "b1216d7e96ce3d9e248167df80f6f55a"
+            }
+        ],
+        "parameters": []
+    }
 ]
 ```
 
