@@ -9,8 +9,6 @@ WORKDIR ${APP_ROOT}
 RUN mkdir -p ${APP_ROOT}/static
 RUN mkdir -p ${APP_ROOT}/media
 
-COPY static/ ${APP_ROOT}/static
-
 # Insall dependencies of postgresql connection
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \

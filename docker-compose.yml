@@ -4,6 +4,7 @@ services:
 
   nginx:
     image: nginx
+    container_name: backend_nginx
     ports:
       - 1337:1337
     restart: always
@@ -22,18 +23,28 @@ services:
   postgres:
     restart: always
     image: postgres:10
-    container_name: postgres
+    container_name: backend_postgres
     env_file: .env
     networks:
       main:
         aliases:
           - postgres
 
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: backend_redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      main:
+        aliases:
+          - redis
+
   web:
     image: registry.gitlab.com/awesomeradio/backend:latest
     build:
       context: .
-    container_name: web
+    container_name: backend_web
     ports:
         - "8000:8000"
     command: sh -c 'until nc -z postgres 5432; do echo "Waiting for Postgres...";done;python manage.py migrate --noinput && ./helper/superuser.sh && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application -w 2 -b :8000 --capture-output --log-level=info'
