@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'crispy_forms',
+    'test_pep8',
     'django_q',
     'channels',
 ]
@@ -98,7 +99,7 @@ DATABASES = {
 
 # Use a SQLite3 Database for local testing
 
-if env("SQLITE", cast=bool, default=False) == True:
+if env("SQLITE", cast=bool, default=False) is True:
     DATABASES["default"] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',
@@ -147,9 +148,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = env("MEDIA_ROOT", default=os.path.join(BASE_DIR, "media"))
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "/staticfiles"),
+    os.path.join(BASE_DIR, "staticfiles"),
 ]
-STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "/static"))
+STATIC_ROOT = env("STATIC_ROOT", default=os.path.join(BASE_DIR, "static"))
 
 # Rest Framework
 # Settings for the Rest-Framework package
@@ -175,3 +176,12 @@ LOGIN_URL = '/login'
 # Format URLs with HTTPS
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Settings for PEP8 tests
+
+PROJECT_DIR = os.path.dirname(__file__)
+TEST_PEP8_DIRS = [os.path.dirname(PROJECT_DIR), ]
+
+TEST_PEP8_EXCLUDE = ['migrations', 'venv'] # Exclude this paths from tests
+TEST_PEP8_IGNORE = ['E128', ] # Ignore this tests
